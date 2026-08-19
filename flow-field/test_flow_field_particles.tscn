@@ -10,6 +10,9 @@ viewport_path = NodePath("VisualizerViewport")
 [node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
 script = ExtResource("1_vna3v")
 bg_color = Color(0.9278887, 0.8921554, 0.49602664, 1)
+ff_frequency = 0.2
+ff_curl = 0.5
+ff_normalize = true
 show_particles = false
 particle_size = 2.0
 
@@ -26,7 +29,8 @@ render_target_update_mode = 4
 
 [node name="ParticleTrails" type="Node2D" parent="VisualizerViewport" unique_id=1427668603]
 script = ExtResource("3_66pp2")
-trail_shrink_duration = 5.0
+trail_max_width = 10.0
+trail_shrink_duration = 2.0
 trail_bloat_duration = 5.0
 
 [node name="VisualizerTexture" type="TextureRect" parent="." unique_id=142747269]
