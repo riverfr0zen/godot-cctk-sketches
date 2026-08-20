@@ -16,23 +16,13 @@ const FREQ_INC := 0.01
 @export var particle_max_velocity := 2.0
 var flow_field : FlowField2D
 var active_preset := preset
+@onready var trails_viz := $VisualizerViewport/ParticleTrails
 @onready var particle_ps := preload("res://addons/godot_cctk/flow_field/particle.tscn") as PackedScene
 @onready var screen_size = get_viewport().get_visible_rect().size
 
 
 func _ready() -> void:
-    RenderingServer.set_default_clear_color(bg_color)
-
-    flow_field = FlowField2D.new(flow_field_size)
-    flow_field.set_scale_for_size(screen_size)
-    flow_field.speed = ff_speed
-    flow_field.frequency = ff_frequency
-    flow_field.curl_tightness = ff_curl
-    flow_field.normalize = ff_normalize
-    $FlowFieldHud.position_center()
-    $FlowFieldHud.flow_field = flow_field
-    $FlowFieldHud.set_cells_prop("modulate", Color(0, 0, 1, 0.4))
-    generate_particles()
+    init_sketch_from_settings()
 
 func _process(delta: float) -> void:
     if active_preset != preset:
@@ -61,6 +51,26 @@ func _unhandled_input(event: InputEvent) -> void:
         flow_field.frequency -= FREQ_INC
         print("frequency: %s" % flow_field.frequency)
 
+func init_sketch_from_settings():
+    $VisualizerViewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
+    RenderingServer.set_default_clear_color(bg_color)
+    flow_field = FlowField2D.new(flow_field_size)
+    flow_field.set_scale_for_size(screen_size)
+    flow_field.speed = ff_speed
+    flow_field.frequency = ff_frequency
+    flow_field.curl_tightness = ff_curl
+    flow_field.normalize = ff_normalize
+    $FlowFieldHud.position_center()
+    $FlowFieldHud.flow_field = flow_field
+    $FlowFieldHud.set_cells_prop("modulate", Color(0, 0, 1, 0.4))
+    clear_particles()
+    generate_particles()
+
+func clear_particles():
+    for p in get_tree().get_nodes_in_group("particles"):
+        remove_child(p)
+        p.queue_free()
+
 func generate_particles():
     for i in range(num_particles):
         var pobj = particle_ps.instantiate()
@@ -72,22 +82,30 @@ func generate_particles():
         add_child(pobj)
         pobj.add_to_group("particles")
         
-func reset_defaults():
-    for prop in get_property_list():
-        if prop["usage"] & PROPERTY_USAGE_EDITOR and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE:
-            var default_val = get_script().get_property_default_value(prop["name"])
-            set(prop["name"], default_val)
-            print(prop["name"], default_val)
+#func reset_defaults():
+    #for prop in get_property_list():
+        #if prop["usage"] & PROPERTY_USAGE_EDITOR and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE:
+            #var default_val = get_script().get_property_default_value(prop["name"])
+            #set(prop["name"], default_val)
+            #print(prop["name"], default_val)
 
 func update_preset():
-    reset_defaults()
+    Utils.reset_defaults(self, ["preset", "show_particles"])
     if preset == "RoseMilk":
-        pass
-    if preset == "Blamble":
-        # bg_color: ede37e
-        # freq: 0.2
-        # curl: 0.5
-        # normalize: true
-        # particle size: 2.0
+        bg_color = Color("ffffff")
+        #ff_frequency = 0.05
+        ff_curl = 0.7
+        #ff_normalize = true
+        particle_size = 2.0
+        init_sketch_from_settings()
+    if preset == "Bramble":
+        print("setting bramble")
+        bg_color = Color("ede37e")
+        ff_frequency = 0.2
+        ff_curl = 0.5
+        ff_normalize = true
+        particle_size = 2.0
+        init_sketch_from_settings()
+
         pass
     active_preset = preset
