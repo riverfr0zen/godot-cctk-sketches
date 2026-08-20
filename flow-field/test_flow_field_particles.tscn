@@ -9,12 +9,13 @@ viewport_path = NodePath("VisualizerViewport")
 
 [node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
 script = ExtResource("1_vna3v")
-bg_color = Color(0.77510977, 0.8014023, 0.74480337, 1)
-ff_frequency = 0.1
-ff_curl = 0.3
-ff_normalize = true
+preset = "Bramble"
+bg_color = Color(0.056084737, 0.09032843, 0.08977803, 1)
+flow_field_size = Vector2(80, 60)
+ff_speed = 1
+ff_curl = 0.4
 show_particles = false
-particle_max_velocity = 5.0
+particle_max_velocity = 0.2
 
 [node name="VisualizerViewport" type="SubViewport" parent="." unique_id=314189074]
 transparent_bg = true
@@ -29,10 +30,10 @@ render_target_update_mode = 4
 
 [node name="ParticleTrails" type="Node2D" parent="VisualizerViewport" unique_id=1427668603]
 script = ExtResource("3_66pp2")
-trail_color_1 = Color(0.9312222, 0.85106874, 0.62858665, 1)
-trail_color_2 = Color(0.51202434, 0.41483104, 0.05877012, 1)
-trail_min_width = 0.5
-trail_max_width = 1.0
+trail_color_1 = Color(0.8222376, 0.9291778, 0.99999994, 1)
+trail_color_2 = Color(0.43570995, 0.42271373, 0.9268229, 1)
+trail_min_width = 1.0
+trail_max_width = 20.0
 trail_bloat_duration = 5.0
 
 [node name="VisualizerTexture" type="TextureRect" parent="." unique_id=142747269]

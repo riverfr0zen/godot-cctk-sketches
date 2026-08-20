@@ -3,7 +3,7 @@ extends Node2D
 const FREQ_INC := 0.01
 
 @export_enum(
-    "None", "Defaults", "Bramble", "CherryBlossom", "ForRumplestiltskin", "RoseMilk", 
+    "None", "Defaults", "Bramble", "CherryBlossom", "ForRumplestiltskin", "Stalactititites", "RoseMilk", 
 ) var preset := "None"
 @export var bg_color := Color.WHITE
 @export var num_particles := 1000
@@ -95,6 +95,7 @@ func update_preset():
         trails_viz.init_from_settings()
     if preset == "Bramble":
         print("setting bramble")
+        num_particles = 500
         bg_color = Color("ede37e")
         ff_frequency = 0.2
         ff_curl = 0.5
@@ -129,6 +130,20 @@ func update_preset():
         trails_viz.trail_color_2 = Color("836a0f")
         trails_viz.trail_min_width = 0.5
         trails_viz.trail_max_width = 1.0
+        trails_viz.trail_shrink_duration = 1.0
+        trails_viz.trail_bloat_duration = 5.0
+        trails_viz.init_from_settings()
+    if preset == "Stalactititites":
+        bg_color = Color("0e1717")
+        flow_field_size = Vector2(80, 60)
+        ff_speed = 1
+        ff_curl = 0.4
+        particle_max_velocity = 0.2
+        init_sketch_from_settings()
+        trails_viz.trail_color_1 = Color("d2edff")
+        trails_viz.trail_color_2 = Color("6f6cec")
+        trails_viz.trail_max_width = 1.0
+        trails_viz.trail_max_width = 20.0
         trails_viz.trail_shrink_duration = 1.0
         trails_viz.trail_bloat_duration = 5.0
         trails_viz.init_from_settings()
