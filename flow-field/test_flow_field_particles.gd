@@ -2,7 +2,9 @@ extends Node2D
 
 const FREQ_INC := 0.01
 
-@export_enum("RoseMilk", "Bramble") var preset := "RoseMilk"
+@export_enum(
+    "None", "Defaults", "RoseMilk", "CherryBlossom", "Bramble"
+) var preset := "None"
 @export var bg_color := Color.WHITE
 @export var num_particles := 1000
 @export var flow_field_size := Vector2(40, 30)
@@ -12,7 +14,7 @@ const FREQ_INC := 0.01
 @export var ff_normalize := false
 @export var show_particles := true
 @export var particle_color := Color.WHITE
-@export var particle_size := 4.0
+@export var particle_size := 2.0
 @export var particle_max_velocity := 2.0
 var flow_field : FlowField2D
 var active_preset := preset
@@ -82,30 +84,51 @@ func generate_particles():
         add_child(pobj)
         pobj.add_to_group("particles")
         
-#func reset_defaults():
-    #for prop in get_property_list():
-        #if prop["usage"] & PROPERTY_USAGE_EDITOR and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE:
-            #var default_val = get_script().get_property_default_value(prop["name"])
-            #set(prop["name"], default_val)
-            #print(prop["name"], default_val)
 
 func update_preset():
-    Utils.reset_defaults(self, ["preset", "show_particles"])
+    if preset != "None":
+        Utils.reset_defaults(self, ["preset", "show_particles"])
+        Utils.reset_defaults(trails_viz)
+
+    if preset == "Defaults":
+        init_sketch_from_settings()
+        trails_viz.init_from_settings()
     if preset == "RoseMilk":
         bg_color = Color("ffffff")
-        #ff_frequency = 0.05
-        ff_curl = 0.7
-        #ff_normalize = true
-        particle_size = 2.0
+        ff_speed = 10.0
+        ff_frequency = 0.01
+        ff_curl = 0.4
+        particle_max_velocity = 5
         init_sketch_from_settings()
+        trails_viz.trail_color_1 = Color("e3d2de")
+        trails_viz.trail_color_2 = Color("bb363eff")
+        trails_viz.trail_max_width = 20.0
+        trails_viz.trail_shrink_duration = 3.0
+        trails_viz.trail_bloat_duration = 5.0
+        trails_viz.init_from_settings()
+    if preset == "CherryBlossom":
+        bg_color = Color("ffffff")
+        ff_curl = 2.5
+        particle_max_velocity = 0.2
+        init_sketch_from_settings()
+        trails_viz.trail_color_1 = Color("e3d2de")
+        trails_viz.trail_color_2 = Color("af4451")
+        trails_viz.trail_max_width = 30.0
+        trails_viz.trail_shrink_duration = 1.0
+        trails_viz.trail_bloat_duration = 5.0
+        trails_viz.init_from_settings()
     if preset == "Bramble":
         print("setting bramble")
         bg_color = Color("ede37e")
         ff_frequency = 0.2
         ff_curl = 0.5
         ff_normalize = true
-        particle_size = 2.0
         init_sketch_from_settings()
-
-        pass
+        trails_viz.trail_color_1 = Color("f5d7c3")
+        trails_viz.trail_color_2 = Color("583300")
+        trails_viz.trail_min_width = 2.0
+        trails_viz.trail_max_width = 10.0
+        trails_viz.trail_shrink_duration = 2.0
+        trails_viz.trail_bloat_duration = 5.0
+        trails_viz.init_from_settings()
     active_preset = preset
