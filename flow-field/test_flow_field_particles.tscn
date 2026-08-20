@@ -9,10 +9,10 @@ viewport_path = NodePath("VisualizerViewport")
 
 [node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
 script = ExtResource("1_vna3v")
-preset = "RoseMilk"
-ff_speed = 10
-ff_frequency = 0.01
-ff_curl = 0.4
+bg_color = Color(0.77510977, 0.8014023, 0.74480337, 1)
+ff_frequency = 0.1
+ff_curl = 0.3
+ff_normalize = true
 show_particles = false
 particle_max_velocity = 5.0
 
@@ -29,10 +29,10 @@ render_target_update_mode = 4
 
 [node name="ParticleTrails" type="Node2D" parent="VisualizerViewport" unique_id=1427668603]
 script = ExtResource("3_66pp2")
-trail_color_1 = Color(0.88880897, 0.8223964, 0.8691838, 1)
-trail_color_2 = Color(0.73333335, 0.21176471, 0.24313726, 1)
-trail_max_width = 20.0
-trail_shrink_duration = 3.0
+trail_color_1 = Color(0.9312222, 0.85106874, 0.62858665, 1)
+trail_color_2 = Color(0.51202434, 0.41483104, 0.05877012, 1)
+trail_min_width = 0.5
+trail_max_width = 1.0
 trail_bloat_duration = 5.0
 
 [node name="VisualizerTexture" type="TextureRect" parent="." unique_id=142747269]

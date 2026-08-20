@@ -4,8 +4,8 @@ extends Node2D
 @export var trail_color_2 := Color(0.2, 0.5, 0.2, 1)
 @export var trail_min_width := 0.1
 @export var trail_max_width := 4.0
-@export var trail_shrink_duration := 0.5
-@export var trail_bloat_duration := 0.5
+@export var trail_shrink_duration := 1.0
+@export var trail_bloat_duration := 1.0
 var trail_width : float
 var trail_color : Color
 var tween_size : Tween

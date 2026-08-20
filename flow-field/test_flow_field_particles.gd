@@ -3,7 +3,7 @@ extends Node2D
 const FREQ_INC := 0.01
 
 @export_enum(
-    "None", "Defaults", "RoseMilk", "CherryBlossom", "Bramble"
+    "None", "Defaults", "Bramble", "CherryBlossom", "ForRumplestiltskin", "RoseMilk", 
 ) var preset := "None"
 @export var bg_color := Color.WHITE
 @export var num_particles := 1000
@@ -93,30 +93,6 @@ func update_preset():
     if preset == "Defaults":
         init_sketch_from_settings()
         trails_viz.init_from_settings()
-    if preset == "RoseMilk":
-        bg_color = Color("ffffff")
-        ff_speed = 10.0
-        ff_frequency = 0.01
-        ff_curl = 0.4
-        particle_max_velocity = 5
-        init_sketch_from_settings()
-        trails_viz.trail_color_1 = Color("e3d2de")
-        trails_viz.trail_color_2 = Color("bb363eff")
-        trails_viz.trail_max_width = 20.0
-        trails_viz.trail_shrink_duration = 3.0
-        trails_viz.trail_bloat_duration = 5.0
-        trails_viz.init_from_settings()
-    if preset == "CherryBlossom":
-        bg_color = Color("ffffff")
-        ff_curl = 2.5
-        particle_max_velocity = 0.2
-        init_sketch_from_settings()
-        trails_viz.trail_color_1 = Color("e3d2de")
-        trails_viz.trail_color_2 = Color("af4451")
-        trails_viz.trail_max_width = 30.0
-        trails_viz.trail_shrink_duration = 1.0
-        trails_viz.trail_bloat_duration = 5.0
-        trails_viz.init_from_settings()
     if preset == "Bramble":
         print("setting bramble")
         bg_color = Color("ede37e")
@@ -131,4 +107,44 @@ func update_preset():
         trails_viz.trail_shrink_duration = 2.0
         trails_viz.trail_bloat_duration = 5.0
         trails_viz.init_from_settings()
+    if preset == "CherryBlossom":
+        bg_color = Color("ffffff")
+        ff_curl = 2.5
+        particle_max_velocity = 0.2
+        init_sketch_from_settings()
+        trails_viz.trail_color_1 = Color("e3d2de")
+        trails_viz.trail_color_2 = Color("af4451")
+        trails_viz.trail_max_width = 30.0
+        trails_viz.trail_shrink_duration = 1.0
+        trails_viz.trail_bloat_duration = 5.0
+        trails_viz.init_from_settings()
+    if preset == "ForRumplestiltskin":
+        bg_color = Color("c6ccbe")
+        ff_frequency = 0.1
+        ff_curl = 0.3
+        ff_normalize = true
+        particle_max_velocity = 5.0
+        init_sketch_from_settings()
+        trails_viz.trail_color_1 = Color("edd9a0")
+        trails_viz.trail_color_2 = Color("836a0f")
+        trails_viz.trail_min_width = 0.5
+        trails_viz.trail_max_width = 1.0
+        trails_viz.trail_shrink_duration = 1.0
+        trails_viz.trail_bloat_duration = 5.0
+        trails_viz.init_from_settings()
+    if preset == "RoseMilk":
+        bg_color = Color("ffffff")
+        ff_speed = 10.0
+        ff_frequency = 0.01
+        ff_curl = 0.4
+        particle_max_velocity = 5
+        init_sketch_from_settings()
+        trails_viz.trail_color_1 = Color("e3d2de")
+        trails_viz.trail_color_2 = Color("bb363eff")
+        trails_viz.trail_max_width = 20.0
+        trails_viz.trail_shrink_duration = 3.0
+        trails_viz.trail_bloat_duration = 5.0
+        trails_viz.init_from_settings()
+
+
     active_preset = preset
