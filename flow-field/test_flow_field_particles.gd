@@ -2,7 +2,8 @@ extends Node2D
 
 const FREQ_INC := 0.01
 
-@export var bg_color := Color("#102025")
+@export_enum("RoseMilk", "Bramble") var preset := "RoseMilk"
+@export var bg_color := Color.WHITE
 @export var num_particles := 1000
 @export var flow_field_size := Vector2(40, 30)
 @export var ff_speed := 2
@@ -14,6 +15,7 @@ const FREQ_INC := 0.01
 @export var particle_size := 4.0
 @export var particle_max_velocity := 2.0
 var flow_field : FlowField2D
+var active_preset := preset
 @onready var particle_ps := preload("res://addons/godot_cctk/flow_field/particle.tscn") as PackedScene
 @onready var screen_size = get_viewport().get_visible_rect().size
 
@@ -33,6 +35,9 @@ func _ready() -> void:
     generate_particles()
 
 func _process(delta: float) -> void:
+    if active_preset != preset:
+        update_preset()
+
     flow_field.update(delta)
     $FlowFieldHud.update()
     for p in get_tree().get_nodes_in_group("particles"):
@@ -66,3 +71,23 @@ func generate_particles():
         pobj.modulate = particle_color
         add_child(pobj)
         pobj.add_to_group("particles")
+        
+func reset_defaults():
+    for prop in get_property_list():
+        if prop["usage"] & PROPERTY_USAGE_EDITOR and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE:
+            var default_val = get_script().get_property_default_value(prop["name"])
+            set(prop["name"], default_val)
+            print(prop["name"], default_val)
+
+func update_preset():
+    reset_defaults()
+    if preset == "RoseMilk":
+        pass
+    if preset == "Blamble":
+        # bg_color: ede37e
+        # freq: 0.2
+        # curl: 0.5
+        # normalize: true
+        # particle size: 2.0
+        pass
+    active_preset = preset

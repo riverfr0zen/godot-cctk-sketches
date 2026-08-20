@@ -9,6 +9,7 @@ viewport_path = NodePath("VisualizerViewport")
 
 [node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
 script = ExtResource("1_vna3v")
+preset = "Bramble"
 bg_color = Color(0.9278887, 0.8921554, 0.49602664, 1)
 ff_frequency = 0.2
 ff_curl = 0.5
