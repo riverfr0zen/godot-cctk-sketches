@@ -3,8 +3,8 @@ extends Node2D
 const TWEEN_SHRINK_IDX = 1
 const TWEEN_INTERVAL_IDX = 2
 
-@export var trail_color_1 := Color(0.5, 0.9, 0.5, 1)
-@export var trail_color_2 := Color(0.2, 0.5, 0.2, 1)
+@export var trail_color_1 := Color("801180")
+@export var trail_color_2 := Color("e9ca34ff")
 @export var trail_clr_1_duration := 10.0
 @export var trail_clr_2_duration := 10.0
 @export var trail_min_width := 0.1
