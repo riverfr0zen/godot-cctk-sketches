@@ -1,5 +1,8 @@
 extends Node2D
 
+const TWEEN_SHRINK_IDX = 1
+const TWEEN_INTERVAL_IDX = 2
+
 @export var trail_color_1 := Color(0.5, 0.9, 0.5, 1)
 @export var trail_color_2 := Color(0.2, 0.5, 0.2, 1)
 @export var trail_clr_1_duration := 10.0
@@ -8,10 +11,15 @@ extends Node2D
 @export var trail_max_width := 4.0
 @export var trail_shrink_duration := 1.0
 @export var trail_bloat_duration := 1.0
+## If set, causes a delay in the trail size tween loop. During the delay, the
+## trail is not drawn.
+@export var trail_delay := 0
 var trail_width : float
 var trail_color : Color
 var tween_size : Tween
 var tween_color : Tween
+var pause_trail := false
+
 
 func _ready() -> void:
     init_from_settings()
@@ -28,6 +36,9 @@ func init_from_settings():
     tween_size = create_tween().set_loops()
     tween_size.tween_property(self, "trail_width", trail_max_width, trail_bloat_duration)
     tween_size.tween_property(self, "trail_width", trail_min_width, trail_shrink_duration)
+    if trail_delay > 0:
+        tween_size.tween_interval(trail_delay)
+    tween_size.step_finished.connect(_on_tween_size_step_finished)
 
     if tween_color:
         tween_color.kill()
@@ -38,5 +49,16 @@ func init_from_settings():
     
 func _draw() -> void:
     for p in get_tree().get_nodes_in_group("particles"):
-        draw_line(to_local(p.previous_global_position), to_local(p.global_position), trail_color, trail_width)
+        if !pause_trail:
+            draw_line(to_local(p.previous_global_position), to_local(p.global_position), trail_color, trail_width)
         p.update_previous()
+
+func _on_tween_size_step_finished(idx: int):
+    if trail_delay > 0:
+        if idx == TWEEN_SHRINK_IDX:
+            pause_trail = true
+            #print("paused")
+        if idx == TWEEN_INTERVAL_IDX:
+            pause_trail = false
+            #print("resumed")
+    #print("finished step %s" % idx)

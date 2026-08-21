@@ -148,6 +148,7 @@ func update_preset():
         trails_viz.trail_min_width = 0.5
         trails_viz.trail_max_width = 20.0
         trails_viz.trail_shrink_duration = 10.0
+        trails_viz.trail_delay = 2.0
         trails_viz.init_from_settings()
     if preset == "Stalactititites":
         bg_color = Color("0e1717")
