@@ -96,7 +96,7 @@ func update_preset():
     if preset == "Bramble":
         print("setting bramble")
         num_particles = 500
-        bg_color = Color("ede37e")
+        bg_color = Color("80c563ff")
         ff_frequency = 0.2
         ff_curl = 0.5
         ff_normalize = true
@@ -149,7 +149,7 @@ func update_preset():
         trails_viz.init_from_settings()
     if preset == "RoseMilk":
         bg_color = Color("ffffff")
-        ff_speed = 10.0
+        ff_speed = 10
         ff_frequency = 0.01
         ff_curl = 0.4
         particle_max_velocity = 5
