@@ -1,20 +1,15 @@
 [gd_scene format=3 uid="uid://d0qxjvj4mo3b"]
 
-[ext_resource type="Script" uid="uid://mv1mxcyklyjg" path="res://flow-field/test_flow_field_particles.gd" id="1_vna3v"]
-[ext_resource type="PackedScene" uid="uid://ndm8abcvi13x" path="res://addons/godot_cctk/flow_field/flow_field_hud.tscn" id="2_2s4v5"]
-[ext_resource type="Script" uid="uid://cpayar0u7ibwv" path="res://flow-field/particle_trails.gd" id="3_66pp2"]
+[ext_resource type="Script" uid="uid://mv1mxcyklyjg" path="res://flow-field/line_color_exploration.gd" id="1_kbuo7"]
+[ext_resource type="Script" uid="uid://cpayar0u7ibwv" path="res://flow-field/particle_trails.gd" id="2_p7pmo"]
+[ext_resource type="PackedScene" uid="uid://ndm8abcvi13x" path="res://addons/godot_cctk/flow_field/flow_field_hud.tscn" id="3_8fnmo"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nyrkb"]
 viewport_path = NodePath("VisualizerViewport")
 
-[node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
-script = ExtResource("1_vna3v")
-bg_color = Color(0.9278887, 0.8921554, 0.49602664, 1)
-ff_frequency = 0.2
-ff_curl = 0.5
-ff_normalize = true
+[node name="LineColorExploration" type="Node2D" unique_id=2048250178]
+script = ExtResource("1_kbuo7")
 show_particles = false
-particle_size = 2.0
 
 [node name="VisualizerViewport" type="SubViewport" parent="." unique_id=314189074]
 transparent_bg = true
@@ -28,10 +23,7 @@ render_target_clear_mode = 1
 render_target_update_mode = 4
 
 [node name="ParticleTrails" type="Node2D" parent="VisualizerViewport" unique_id=1427668603]
-script = ExtResource("3_66pp2")
-trail_max_width = 10.0
-trail_shrink_duration = 2.0
-trail_bloat_duration = 5.0
+script = ExtResource("2_p7pmo")
 
 [node name="VisualizerTexture" type="TextureRect" parent="." unique_id=142747269]
 custom_minimum_size = Vector2(1152, 648)
@@ -40,6 +32,6 @@ offset_bottom = 40.0
 texture = SubResource("ViewportTexture_nyrkb")
 expand_mode = 1
 
-[node name="FlowFieldHud" parent="." unique_id=1522610477 instance=ExtResource("2_2s4v5")]
+[node name="FlowFieldHud" parent="." unique_id=1522610477 instance=ExtResource("3_8fnmo")]
 visible = false
 size = Vector2(1152, 648)
