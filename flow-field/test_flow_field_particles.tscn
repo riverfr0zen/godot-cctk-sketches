@@ -9,7 +9,7 @@ viewport_path = NodePath("VisualizerViewport")
 
 [node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
 script = ExtResource("1_vna3v")
-preset = "Stalactititites"
+preset = "Defaults"
 show_particles = false
 
 [node name="VisualizerViewport" type="SubViewport" parent="." unique_id=314189074]

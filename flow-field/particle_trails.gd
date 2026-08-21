@@ -2,6 +2,8 @@ extends Node2D
 
 @export var trail_color_1 := Color(0.5, 0.9, 0.5, 1)
 @export var trail_color_2 := Color(0.2, 0.5, 0.2, 1)
+@export var trail_clr_2_duration := 10.0
+@export var trail_clr_1_duration := 10.0
 @export var trail_min_width := 0.1
 @export var trail_max_width := 4.0
 @export var trail_shrink_duration := 1.0
@@ -30,8 +32,8 @@ func init_from_settings():
     if tween_color:
         tween_color.kill()
     tween_color = create_tween().set_loops()
-    tween_color.tween_property(self, "trail_color", trail_color_2, 10.0)
-    tween_color.tween_property(self, "trail_color", trail_color_1, 10.0)
+    tween_color.tween_property(self, "trail_color", trail_color_2, trail_clr_2_duration)
+    tween_color.tween_property(self, "trail_color", trail_color_1, trail_clr_1_duration)
 
     
 func _draw() -> void:

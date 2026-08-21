@@ -156,6 +156,7 @@ func update_preset():
         init_sketch_from_settings()
         trails_viz.trail_color_1 = Color("e3d2de")
         trails_viz.trail_color_2 = Color("bb363eff")
+        trails_viz.trail_clr_1_duration = 2.0
         trails_viz.trail_max_width = 20.0
         trails_viz.trail_shrink_duration = 3.0
         trails_viz.trail_bloat_duration = 5.0
