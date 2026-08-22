@@ -3,8 +3,9 @@ extends Node2D
 const FREQ_INC := 0.01
 
 @export_enum(
-    "None", "Defaults", "Bramble", "CherryBlossom", "ForRumplestiltskin", 
-    "GreenChillies", "MouseDroppings", "Stalactititites", "RoseMilk", 
+    "None", "Defaults", "Bramble", "CherryBlossom", "DarkJungle", 
+    "ForRumplestiltskin", "GreenChillies", "MouseDroppings", "Stalactititites",
+    "RoseMilk", 
 ) var preset := "None"
 @export var bg_color := Color.WHITE
 @export var num_particles := 1000
@@ -125,6 +126,16 @@ func update_preset():
         trails_viz.trail_max_width = 30.0
         trails_viz.trail_shrink_duration = 1.0
         trails_viz.trail_bloat_duration = 5.0
+        trails_viz.init_from_settings()
+    if preset == "DarkJungle":
+        bg_color = Color("808865")
+        ff_vector_mod = Vector2(0.1, 2.0)
+        ff_frequency = 0.1
+        init_sketch_from_settings()
+        trails_viz.trail_color_1 = Color("86b259")
+        trails_viz.trail_color_2 = Color("190f03")
+        trails_viz.trail_max_width = 10.0
+        trails_viz.trail_delay = 1
         trails_viz.init_from_settings()
     if preset == "ForRumplestiltskin":
         bg_color = Color("c6ccbe")
