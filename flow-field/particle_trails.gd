@@ -13,7 +13,7 @@ const TWEEN_INTERVAL_IDX = 2
 @export var trail_bloat_duration := 1.0
 ## If set, causes a delay in the trail size tween loop. During the delay, the
 ## trail is not drawn.
-@export var trail_delay := 0
+@export var trail_delay := 0.0
 var trail_width : float
 var trail_color : Color
 var tween_size : Tween
