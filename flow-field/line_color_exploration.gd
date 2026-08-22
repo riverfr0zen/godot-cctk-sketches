@@ -9,6 +9,7 @@ const FREQ_INC := 0.01
 @export var bg_color := Color.WHITE
 @export var num_particles := 1000
 @export var flow_field_size := Vector2(40, 30)
+@export var ff_vector_mod := Vector2.ONE
 @export var ff_speed := 2
 @export var ff_frequency := 0.05
 @export var ff_curl := 1.0
@@ -17,6 +18,9 @@ const FREQ_INC := 0.01
 @export var particle_color := Color.WHITE
 @export var particle_size := 2.0
 @export var particle_max_velocity := 2.0
+## Can be used to modify the force applied to the particle. 
+## NOTE: particle velocity will never exceed `particle_max_velocity`
+@export var particle_force_modifier := Vector2.ONE
 var flow_field : FlowField2D
 var active_preset := preset
 @onready var trails_viz := $VisualizerViewport/ParticleTrails
@@ -62,6 +66,7 @@ func init_sketch_from_settings():
     flow_field.speed = ff_speed
     flow_field.frequency = ff_frequency
     flow_field.curl_tightness = ff_curl
+    flow_field.vector_modifier = ff_vector_mod
     flow_field.normalize = ff_normalize
     $FlowFieldHud.position_center()
     $FlowFieldHud.flow_field = flow_field
@@ -80,6 +85,7 @@ func generate_particles():
         pobj.scale = Vector2(particle_size, particle_size)
         pobj.global_position = Vector2(randf_range(0, screen_size.x), randf_range(0, screen_size.y))
         pobj.max_velocity = particle_max_velocity
+        pobj.force_modifier = particle_force_modifier
         pobj.visible = show_particles
         pobj.modulate = particle_color
         add_child(pobj)
