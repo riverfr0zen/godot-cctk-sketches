@@ -4,7 +4,7 @@ const FREQ_INC := 0.01
 
 @export_enum(
     "None", "Defaults", "Bramble", "CherryBlossom", "ForRumplestiltskin", 
-    "GreenChillies", "Stalactititites", "RoseMilk", 
+    "GreenChillies", "MouseDroppings", "Stalactititites", "RoseMilk", 
 ) var preset := "None"
 @export var bg_color := Color.WHITE
 @export var num_particles := 1000
@@ -150,6 +150,22 @@ func update_preset():
         trails_viz.trail_shrink_duration = 10.0
         trails_viz.trail_delay = 2.0
         trails_viz.init_from_settings()
+    if preset == "MouseDroppings":
+        bg_color = Color("f7dae1")
+        num_particles = 500
+        flow_field_size = Vector2(80, 60)
+        ff_curl = 2.5
+        ff_normalize = true
+        particle_max_velocity = 0.5
+        init_sketch_from_settings()
+        #trails_viz.trail_color_1 = Color("d2edff")
+        #trails_viz.trail_color_2 = Color("6f6cec")
+        trails_viz.trail_min_width = 1.0
+        trails_viz.trail_max_width = 2.0
+        trails_viz.trail_shrink_duration = 0.1
+        trails_viz.trail_bloat_duration = 0.1
+        trails_viz.trail_delay = 2.0
+        trails_viz.init_from_settings()
     if preset == "Stalactititites":
         bg_color = Color("0e1717")
         flow_field_size = Vector2(80, 60)
@@ -159,7 +175,7 @@ func update_preset():
         init_sketch_from_settings()
         trails_viz.trail_color_1 = Color("d2edff")
         trails_viz.trail_color_2 = Color("6f6cec")
-        trails_viz.trail_max_width = 1.0
+        trails_viz.trail_min_width = 1.0
         trails_viz.trail_max_width = 20.0
         trails_viz.trail_shrink_duration = 1.0
         trails_viz.trail_bloat_duration = 5.0
