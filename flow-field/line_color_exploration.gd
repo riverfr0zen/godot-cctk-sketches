@@ -3,7 +3,7 @@ extends Node2D
 const FREQ_INC := 0.01
 
 @export_enum(
-    "None", "Defaults", "Bramble", "CherryBlossom", "DarkJungle", 
+    "None", "Defaults", "Bramble", "BattyBowties", "CherryBlossom", "DarkJungle", 
     "ForRumplestiltskin", "GreenChillies", "MouseDroppings", "Stalactititites",
     "RoseMilk", 
 ) var preset := "None"
@@ -102,7 +102,6 @@ func update_preset():
         init_sketch_from_settings()
         trails_viz.init_from_settings()
     if preset == "Bramble":
-        print("setting bramble")
         num_particles = 500
         bg_color = Color("80c563ff")
         ff_frequency = 0.2
@@ -115,6 +114,24 @@ func update_preset():
         trails_viz.trail_max_width = 10.0
         trails_viz.trail_shrink_duration = 2.0
         trails_viz.trail_bloat_duration = 5.0
+        trails_viz.init_from_settings()
+    if preset == "BattyBowties":
+        num_particles = 40
+        bg_color = Color("1254ff")
+        ff_frequency = 0.03
+        ff_curl = 0.6
+        ff_vector_mod = Vector2(1.0, 0.5)
+        particle_max_velocity = 1.0
+        init_sketch_from_settings()
+        trails_viz.trail_color_1 = Color("221b12")
+        trails_viz.trail_color_2 = Color("be97fe")
+        trails_viz.trail_clr_2_duration = 1.0
+        trails_viz.trail_clr_2_duration = 1.0
+        trails_viz.trail_min_width = 30.0
+        trails_viz.trail_max_width = 5.0
+        trails_viz.trail_shrink_duration = 0.2
+        trails_viz.trail_bloat_duration = 0.2
+        trails_viz.trail_delay = 3.0
         trails_viz.init_from_settings()
     if preset == "CherryBlossom":
         bg_color = Color("ffffff")
